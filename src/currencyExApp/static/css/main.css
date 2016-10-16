@@ -1,0 +1,15 @@
+form, h2{
+	text-align: center;
+}
+
+form label, form button{
+	padding: 0px 5px 0px 5px;
+}
+
+form{
+	padding: 30px 0px 30px 0px;
+}
+
+h2{
+	padding-bottom: 30px;
+}
