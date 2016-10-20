@@ -1,0 +1,34 @@
+<div id="currency-ex-result">    
+    
+    <h4><small>{{exRates.timestamp}} GMT, refreshing in <span id="timer-refresh">60</span> seconds...</small></h4>
+    <h2><b>{{getValues.amt}} {{getValues.froCurr}}</b> = {{exRates.value}} {{getValues.toCurr}}</h2>           
+    <table class="table table-striped">         
+        <tbody>
+            <tr>
+                <td class="col-sm-2">&nbsp;</td>                        
+                {% for sym in commonCurrencies %}
+                <td class="col-sm-2">
+                    {{allCurrencies|get_currency_name:sym}} 
+                    <span class="flag flag-{{allCurrencies|get_flag:sym}}" alt="{{allCurrencies|get_currency_name:sym}}"></span>
+                </td>                   
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="col-sm-2">
+                    1 {{allCurrencies|get_currency_name:getValues.froCurr}} 
+                    <span class="flag flag-{{allCurrencies|get_flag:getValues.froCurr}}" alt="{{allCurrencies|get_currency_name:getValues.froCurr}}"></span>
+                </td>
+                {% for exRate in exRates.commonConversion %}
+                    <td class="col-sm-2">{{exRate}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Inverse</td>
+                {% for exRate in exRates.commonInConversion %}
+                    <td class="col-sm-2">{{exRate}}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <h4><small><br></small></h4>
+</div> 
