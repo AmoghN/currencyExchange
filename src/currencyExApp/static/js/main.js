@@ -3,8 +3,9 @@ var data = null;
 var timerId = null;
 
 $(document).ready(function(){
-    startTimer();
     data = $("#currency-ex-form").serializeArray();
+    drawGraph();
+    startTimer();    
 });
 
 function validateForm(){
@@ -34,8 +35,8 @@ function getResult(data){
         encode      : true  
     })
     .done(function(data){
-        $("#currency-ex-result").remove();
-        $(".container").append(data);        
+        $("#currency-ex-result").empty();
+        $("#currency-ex-result").append(data);                
         startTimer();
     });
 }
@@ -57,10 +58,66 @@ function startTimer(){
     },1000);
 }
 
-//switch currency to-from
+// switch currency to-from
 function currencySwitch(){
     var froCurr = $('#froCurr').find(":selected").val();
     var toCurr = $('#toCurr').find(":selected").val();
     $('#froCurr').val(toCurr);
     $('#toCurr').val(froCurr);
 }
+
+// draw historic data graph
+function drawGraph() {    
+    $.ajax({
+        type    : 'GET',
+        url     : '/hresult',
+        data    :  data,
+        encode  : true 
+    }).done(function(data) {        
+        // create the chart
+        $('#hresult-graph').highcharts('StockChart', {
+
+            title: {
+                text: hresultGraphTitle
+            },
+
+            subtitle: {
+                text: '(past month)'
+            },
+
+            xAxis: {
+                gapGridLineWidth: 0
+            },
+
+            rangeSelector: {
+                buttons: [],           
+                inputEnabled: false
+            },
+
+            series: [{
+                name: name,
+                type: 'area',
+                data: data,
+                gapSize: 5,
+                tooltip: {
+                    valueDecimals: 5
+                },
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                threshold: null
+            }]
+        });
+    });
+}
+
+

@@ -15,8 +15,8 @@ def result(request):
 
 
 def hresult(request):
-    gethresults = getHistoricRequest(request)
-    return JsonResponse(gethresults)
+    getHresults = getHistoricRequest(request)
+    return JsonResponse(getHresults, safe=False)
 
 # custom filter sym->currency name
 @register.filter

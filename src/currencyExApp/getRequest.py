@@ -38,4 +38,4 @@ def getRequest(request):
 
 
 def getHistoricRequest(request):
-    return getHistoricData(request.GET['froCurr'])
+    return getHistoricData(request.GET['froCurr'], request.GET['toCurr'])
