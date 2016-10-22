@@ -1,15 +1,15 @@
 // global variables
-var data = null;
+var formData = null;
 var timerId = null;
 
 $(document).ready(function(){
-    data = $("#currency-ex-form").serializeArray();
+    formData = $("#currency-ex-form").serializeArray();
     drawGraph();
     startTimer();    
 });
 
 function validateForm(){
-    data = $("#currency-ex-form").serializeArray();
+    formData = $("#currency-ex-form").serializeArray();
     var validation = true; 
 
     // clear all errors
@@ -17,20 +17,25 @@ function validateForm(){
         $(this).removeClass("has-error");
     });    
 
-    if(data[0].value == "" || parseFloat(data[0].value) <= 0 ){
+    if(formData[0].value == "" || parseFloat(formData[0].value) <= 0 ){
         $("#amt-form-group").addClass("has-error"); 
         validation = false;       
+    }
+
+    if(formData[1].value == formData[2].value){
+        $("#curr-form-group").addClass("has-error");
+        validation = false;
     }
 
     return validation;
 }
 
 // making ajax get request
-function getResult(data){
+function getResult(formData){
     $.ajax({
         type        : 'GET',
         url         : '/result',
-        data        : data,
+        data        : formData,
         dataType    : 'html',
         encode      : true  
     })
@@ -48,13 +53,13 @@ function startTimer(){
     if (timerId) clearInterval(timerId);
     // start new timer
     timerId = setInterval(function(){
-        seconds -= 1;
+        seconds -= 1;        
+        if(seconds != 1) $("#timer-refresh").text(seconds + " seconds...");
+        else $("#timer-refresh").text(seconds + " second...");        
         if (seconds <= 0) {
-            getResult(data);
+            getResult(formData);
             clearInterval(timerId);
         }
-        $("#timer-refresh").text(seconds);
-
     },1000);
 }
 
@@ -71,36 +76,31 @@ function drawGraph() {
     $.ajax({
         type    : 'GET',
         url     : '/hresult',
-        data    :  data,
+        data    :  formData,
         encode  : true 
     }).done(function(data) {        
         // create the chart
         $('#hresult-graph').highcharts('StockChart', {
 
             title: {
-                text: hresultGraphTitle
-            },
-
-            subtitle: {
-                text: '(past month)'
-            },
-
-            xAxis: {
-                gapGridLineWidth: 0
+                text: "1 " + formData[1].value + " \u2192 " + formData[2].value
             },
 
             rangeSelector: {
-                buttons: [],           
-                inputEnabled: false
+                 enabled: false
+            },
+
+            scrollbar: {
+                enabled: false
             },
 
             series: [{
-                name: name,
+                name: formData[2].value,
                 type: 'area',
                 data: data,
                 gapSize: 5,
                 tooltip: {
-                    valueDecimals: 5
+                    valueDecimals: 4
                 },
                 fillColor: {
                     linearGradient: {

@@ -16,12 +16,9 @@ def createExRateQuery(froCurr, toCurr):
     return ratesJson
 
 
-def createHistoricQuery(froCurr, toCurr):
-    result = []
+def createHistoricQuery(curr):
     startDate = (datetime.datetime.now() - datetime.timedelta(days=30)).strftime("%Y/%m/%d")
     endDate = datetime.datetime.now().strftime("%Y/%m/%d")
-    for curr in [froCurr, toCurr]:
-        query = "https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = '" + curr + "=X' and startDate ='" + startDate + "'and endDate ='" + endDate + "' &format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
-        HistoricJson = requests.get(query).json()['query']['results']['quote']
-        result.append(HistoricJson)
-    return result
+    query = "https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = '" + curr + "=X' and startDate ='" + startDate + "'and endDate ='" + endDate + "' &format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
+    historicJson = requests.get(query).json()['query']['results']['quote']    
+    return historicJson

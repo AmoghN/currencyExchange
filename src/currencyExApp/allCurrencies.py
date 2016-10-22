@@ -1,4 +1,4 @@
-allCurrencies = {
+allCurrenciesDetails = {
     'AUD': ['Australian Dollar', 'au'],
     'GBP': ['British Pound', 'gb'],
     'CAD': ['Canadian Dollar', 'ca'],
@@ -11,4 +11,6 @@ allCurrencies = {
     'EUR': ['Euro', 'eu']
 }
 
-commonCurrencies = ['USD', 'GBP', 'EUR', 'INR', 'JPY']
+allCurrencies = sorted(['AUD', 'GBP', 'CAD', 'INR', 'JPY', 'RUB', 'SGD', 'CHF', 'USD', 'EUR'])
+
+commonCurrencies = ['GBP', 'EUR', 'USD', 'INR', 'JPY']

@@ -12,7 +12,7 @@ def getRequest(request):
     getResults = None
     # checking GET parameters
     if 'amt' in request.GET and request.GET['amt'] != "":
-        amt = request.GET['amt']
+        amt = round(float(request.GET['amt']), 2)
     if 'froCurr' in request.GET and request.GET['froCurr'] != "":
         froCurr = request.GET['froCurr']
     if 'toCurr' in request.GET and request.GET['toCurr'] != "":

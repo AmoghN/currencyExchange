@@ -12,3 +12,8 @@ h2{
 #currency-switch{
 	text-decoration: none;
 }
+
+#hresult-graph{
+	height:300px; 
+	min-width: 310px;
+}

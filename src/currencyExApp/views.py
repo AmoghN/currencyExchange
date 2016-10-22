@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template.defaulttags import register
 from django.http import JsonResponse
 from .getRequest import *
+from .allCurrencies import allCurrenciesDetails
 
 
 def home(request):
@@ -20,10 +21,10 @@ def hresult(request):
 
 # custom filter sym->currency name
 @register.filter
-def get_currency_name(dictionary, sym):
-    return dictionary.get(sym)[0]
+def get_currency_name(sym):
+    return allCurrenciesDetails.get(sym)[0]
 
 # custom filter sym->flag tag
 @register.filter
-def get_flag(dictionary, sym):
-    return dictionary.get(sym)[1]
+def get_flag(sym):
+    return allCurrenciesDetails.get(sym)[1]

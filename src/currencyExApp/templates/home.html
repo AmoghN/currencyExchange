@@ -19,44 +19,39 @@
           <div class="form-group" id="amt-form-group">
               <label for="amt">Convert</label>
               {% if getValues.amt %}
-                <input class="form-control" type="text" name="amt" placeholder="20" id="amt" value="{{getValues.amt}}" />
+                <input class="form-control" type="number" step="0.01" name="amt" placeholder="20" id="amt" value="{{getValues.amt}}" />
               {% else %}
-                <input class="form-control" type="text" name="amt" placeholder="20" id="amt"/>
+                <input class="form-control" type="number" name="amt" placeholder="20" id="amt"/>
               {% endif %}
           </div>
           <div class="form-group" id="curr-form-group">
               <select class="form-control" name="froCurr" id="froCurr">
-                  {% for sym, name in allCurrencies.items %}
+                  {% for sym in allCurrencies %}
                       {% if sym == getValues.froCurr %}
-                        <option value="{{sym}}" selected>{{sym}} - {{name.0}}</option>
+                        <option value="{{sym}}" selected>{{sym}} - {{sym|get_currency_name}}</option>
                       {% else %}
-                        <option value="{{sym}}">{{sym}} - {{name.0}}</option>
+                        <option value="{{sym}}">{{sym}} - {{sym|get_currency_name}}</option>
                       {% endif %}
                   {% endfor %}
               </select>
               <a href="#" onclick="currencySwitch();" id="currency-switch">&#8596;</a>
               <select class="form-control" name="toCurr" id="toCurr">
-                  {% for sym, name in allCurrencies.items %}
+                  {% for sym in allCurrencies %}
                     {% if sym == getValues.toCurr %}
-                      <option value="{{sym}}" selected>{{sym}} - {{name.0}}</option>
+                      <option value="{{sym}}" selected>{{sym}} - {{sym|get_currency_name}}</option>
                     {% else %}
-                        <option value="{{sym}}">{{sym}} - {{name.0}}</option>
+                        <option value="{{sym}}">{{sym}} - {{sym|get_currency_name}}</option>
                     {% endif %}
                   {% endfor %}
               </select>
           </div>
           <button type="submit" class="btn btn-default">Calculate</button>            
         </form>
-        {% if exRates %}
-          <h4><small>{{exRates.timestamp}} GMT. Refreshing in <span id="timer-refresh">60</span> seconds...</small></h4>
+        {% if exRates %}          
           <!-- exchange result -->            
           {% include "result.html" %}
           <!-- historic graph -->
-          <div id='hresult-graph' style="min-width: 310px"></div>           
-          <script type="text/javascript">
-            var name = "{{getValues.toCurr}}";
-            var hresultGraphTitle = "{{getValues.froCurr}} \u2192 {{getValues.toCurr}}";          
-          </script>
+          <div id='hresult-graph'></div>
         {% endif %}
     </div>     
 <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
