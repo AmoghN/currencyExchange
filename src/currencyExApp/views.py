@@ -1,24 +1,37 @@
 from django.shortcuts import render
 from django.template.defaulttags import register
 from django.http import JsonResponse
-from .getRequest import *
 from .allCurrencies import allCurrenciesDetails
+from .getRequest import *
 
 
 def home(request):
-    getResults = getRequest(request)
-    return render(request, 'home.html', getResults)
+    try:
+        getResults = getRequest(request)
+        return render(request, 'home.html', getResults)
+    except Exception:
+        return showError(request)
 
 
 def result(request):
-    getResults = getRequest(request)
-    return render(request, 'result.html', getResults)
+    try:
+        getResults = getRequest(request)
+        return render(request, 'result.html', getResults)
+    except Exception:
+        return showError(request)
 
 
 def hresult(request):
-    getHresults = getHistoricRequest(request)
-    return JsonResponse(getHresults, safe=False)
+    try:
+        getHresults = getHistoricRequest(request)
+        return JsonResponse(getHresults, safe=False)
+    except Exception:
+        return showError(request)
 
+
+def showError(request):
+    return render(request, 'error.html', {'showError': True}, status=500)
+    
 # custom filter sym->currency name
 @register.filter
 def get_currency_name(sym):

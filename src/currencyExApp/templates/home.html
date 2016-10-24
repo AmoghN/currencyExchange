@@ -15,48 +15,48 @@
 </head>
 <body>    
     <div class="container">
-        <form id="currency-ex-form" class="form-inline" method="GET" onsubmit="return validateForm();">
-          <div class="form-group" id="amt-form-group">
-              <label for="amt">Convert</label>
-              {% if getValues.amt %}
-                <input class="form-control" type="number" step="0.01" name="amt" placeholder="20" id="amt" value="{{getValues.amt}}" />
-              {% else %}
-                <input class="form-control" type="number" name="amt" placeholder="20" id="amt"/>
-              {% endif %}
-          </div>
-          <div class="form-group" id="curr-form-group">
-              <select class="form-control" name="froCurr" id="froCurr">
-                  {% for sym in allCurrencies %}
-                      {% if sym == getValues.froCurr %}
-                        <option value="{{sym}}" selected>{{sym}} - {{sym|get_currency_name}}</option>
-                      {% else %}
-                        <option value="{{sym}}">{{sym}} - {{sym|get_currency_name}}</option>
-                      {% endif %}
-                  {% endfor %}
-              </select>
-              <a href="#" onclick="currencySwitch();" id="currency-switch">&#8596;</a>
-              <select class="form-control" name="toCurr" id="toCurr">
-                  {% for sym in allCurrencies %}
-                    {% if sym == getValues.toCurr %}
+      <form id="currency-ex-form" class="form-inline" method="GET" onsubmit="return validateForm();">
+        <div class="form-group" id="amt-form-group">
+            <label for="amt">Convert</label>
+            {% if getValues.amt %}
+              <input class="form-control" type="number" step="0.01" name="amt" placeholder="20" id="amt" value="{{getValues.amt}}" />
+            {% else %}
+              <input class="form-control" type="number" step="0.01" name="amt" placeholder="20" id="amt"/>
+            {% endif %}
+        </div>
+        <div class="form-group" id="curr-form-group">
+            <select class="form-control" name="froCurr" id="froCurr">
+                {% for sym in allCurrencies %}
+                    {% if sym == getValues.froCurr %}
                       <option value="{{sym}}" selected>{{sym}} - {{sym|get_currency_name}}</option>
                     {% else %}
-                        <option value="{{sym}}">{{sym}} - {{sym|get_currency_name}}</option>
+                      <option value="{{sym}}">{{sym}} - {{sym|get_currency_name}}</option>
                     {% endif %}
-                  {% endfor %}
-              </select>
-          </div>
-          <button type="submit" class="btn btn-default">Calculate</button>            
-        </form>
-        {% if exRates %}          
-          <!-- exchange result -->            
-          {% include "result.html" %}
-          <!-- historic graph -->
-          <div id='hresult-graph'></div>
-        {% endif %}
-    </div>     
+                {% endfor %}
+            </select>
+            <a href="#" onclick="currencySwitch();" id="currency-switch">&#8596;</a>
+            <select class="form-control" name="toCurr" id="toCurr">
+                {% for sym in allCurrencies %}
+                  {% if sym == getValues.toCurr %}
+                    <option value="{{sym}}" selected>{{sym}} - {{sym|get_currency_name}}</option>
+                  {% else %}
+                      <option value="{{sym}}">{{sym}} - {{sym|get_currency_name}}</option>
+                  {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-default">Calculate</button>            
+      </form>
+      {% if exRates %}          
+        <!-- exchange result -->            
+        {% include "result.html" %}
+        <!-- historic graph -->
+        <div id='hresult-graph'></div>
+      {% endif %}              
+    </div>
 <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/highstock.js'%}"> </script>
+<script type="text/javascript" src="{% static 'js/highstock.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
