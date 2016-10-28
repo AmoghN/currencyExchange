@@ -30,7 +30,7 @@ def hresult(request):
 
 
 def showError(request):
-    return render(request, 'error.html', {'showError': True}, status=500)
+    return render(request, 'error.html', {}, status=500)
     
 # custom filter sym->currency name
 @register.filter

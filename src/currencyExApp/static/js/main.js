@@ -4,7 +4,7 @@ var timerId = null;
 
 $(document).ready(function(){
     formData = $("#currency-ex-form").serializeArray();
-    drawGraph();
+    if(formData && formData[0].value != "") drawGraph();
     startTimer();    
 });
 
@@ -37,12 +37,17 @@ function getResult(formData){
         url         : '/result',
         data        : formData,
         dataType    : 'html',
-        encode      : true  
+        encode      : true,        
     })
     .done(function(data){
         $("#currency-ex-result").empty();
         $("#currency-ex-result").append(data);                
         startTimer();
+    })
+    .fail(function(data){
+        $("#currency-ex-result").empty();
+        $('#hresult-graph').empty();
+        $("#currency-ex-result").append(data.responseText);
     });
 }
 
@@ -77,7 +82,8 @@ function drawGraph() {
         type    : 'GET',
         url     : '/hresult',
         data    :  formData,
-        encode  : true 
+        encode  : true,
+        async   : true 
     }).done(function(data) {        
         // create the chart
         $('#hresult-graph').highcharts('StockChart', {
@@ -117,6 +123,9 @@ function drawGraph() {
                 threshold: null
             }]
         });
+    })
+    .fail(function(data){
+        $('#hresult-graph').append(data.responseText);
     });
 }
 

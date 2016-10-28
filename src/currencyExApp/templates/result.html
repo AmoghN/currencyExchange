@@ -1,3 +1,7 @@
+{% extends "basic.html" %}
+
+{% block title %} {{getValues.froCurr}}/{{getValues.toCurr}} - Currency Exchange {% endblock %}
+{% block content %}
 <div id="currency-ex-result">
     <h4><small>{{exRates.timestamp}} GMT. Refreshing in <span id="timer-refresh">60 seconds...</span></small></h4>    
     <h2><b>{{getValues.amt}} {{getValues.froCurr}}</b> = {{exRates.value}} {{getValues.toCurr}}</h2>           
@@ -30,4 +34,5 @@
         </tbody>
     </table>
     <h4><small><br></small></h4>
-</div> 
+</div>
+{% endblock %} 
