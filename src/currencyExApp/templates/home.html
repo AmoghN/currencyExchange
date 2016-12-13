@@ -1,6 +1,12 @@
 {% extends "basic.html" %}
 
-{% block title %} Currency Exchange {% endblock %}
+{%load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/flags.css' %}"/>
+{% endblock %}
+
+{% block title %}{% if exRates %}{{getValues.froCurr}}/{{getValues.toCurr}}- {% endif %}Currency Exchange {% endblock %}
+
 {% block content %}
 <div class="container">
     <form id="currency-ex-form" class="form-inline" method="GET" onsubmit="return validateForm();">
@@ -45,7 +51,7 @@
 {% endblock %}
 
 {% block scripts %}
-{% load static %}
 <script type="text/javascript" src="{% static 'js/highstock.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 {% endblock %}
+

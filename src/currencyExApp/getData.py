@@ -1,4 +1,5 @@
 import datetime
+import time
 from .createQuery import *
 
 
@@ -27,7 +28,9 @@ def getHistoricData(froCurr, toCurr):
         for hresult in range(0, len(toHresults)):
             result = []
             # changing timestamp to UNIX milliseconds
-            result.append(int(datetime.datetime.strptime(toHresults[hresult]['Date'], "%Y-%m-%d").timestamp()) * 1000)
+            # result.append(int(datetime.datetime.strptime(toHresults[hresult]['Date'], "%Y-%m-%d").timestamp()) * 1000)
+            timestamp = time.mktime(datetime.datetime.strptime(toHresults[hresult]['Date'], "%Y-%m-%d").timetuple())
+            result.append(int(timestamp * 1000))
             result.append(round(float(toHresults[hresult]['Close']) / float(froHresults[hresult]['Close']), 4))
             hresults.append(result)
     else:
@@ -40,7 +43,9 @@ def getHistoricData(froCurr, toCurr):
 
         for hresult in range(0, len(getHresult)):
             result = []
-            result.append(int(datetime.datetime.strptime(getHresult[hresult]['Date'], "%Y-%m-%d").timestamp()) * 1000)
+            #result.append(int(datetime.datetime.strptime(getHresult[hresult]['Date'], "%Y-%m-%d").timestamp()) * 1000)
+            timestamp = time.mktime(datetime.datetime.strptime(getHresult[hresult]['Date'], "%Y-%m-%d").timetuple())
+            result.append(int(timestamp * 1000))
             if(toCurr == 'USD'):
                 result.append(round(1 / float(getHresult[hresult]['Close']), 4))
             else:
