@@ -1,2 +1,15 @@
 Django==1.10.4
 requests==2.12.4
+MarkupSafe==0.23
+Werkzeug==0.11.4
+babelfish==0.5.5
+colorama==0.3.7
+feedparser==5.2.1
+guessit==2.0.4
+gunicorn==19.4.5
+itsdangerous==0.24
+python-dateutil==2.5.1
+rebulk==0.7.1
+six==1.10.0
+ss==1.6.0
+virtualenv==15.0.1
