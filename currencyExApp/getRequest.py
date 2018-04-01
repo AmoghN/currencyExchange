@@ -17,14 +17,15 @@ def getRequest(request):
         froCurr = request.GET['froCurr']
     if 'toCurr' in request.GET and request.GET['toCurr'] != "":
         toCurr = request.GET['toCurr']
-    # getting exhange rates
+    # getting exchange rates
     if(amt and froCurr and toCurr):
         exRates = getExchange(amt, froCurr, toCurr)
 
-    getValues = {}
-    getValues["amt"] = amt
-    getValues["toCurr"] = toCurr
-    getValues["froCurr"] = froCurr
+    getValues = {
+        "amt" : amt,
+        "toCurr" : toCurr,
+        "froCurr" : froCurr
+    }
 
     # result object
     getResults = {
@@ -35,7 +36,3 @@ def getRequest(request):
     }
 
     return getResults
-
-
-def getHistoricRequest(request):
-    return getHistoricData(request.GET['froCurr'], request.GET['toCurr'])

@@ -5,3 +5,4 @@ staticfiles
 *.json
 *.sqlite3
 .vscode
+*.conf

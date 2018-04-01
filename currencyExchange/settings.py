@@ -21,12 +21,13 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "es_wle+1_ml7x7!en7-pg$fc(=r3099%_byo!kyu6vo1*l00=%"
+SECRET_KEY = os.getenv("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://currencyexapp.herokuapp.com/']
+ALLOWED_HOSTS = ['currencyexapp.herokuapp.com']
 
 # Application definition
 

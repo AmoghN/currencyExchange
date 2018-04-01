@@ -6,29 +6,14 @@ from .getRequest import *
 
 
 def home(request):
-    try:
-        getResults = getRequest(request)
-        return render(request, 'home.html', getResults)
-    except Exception:
-        return showError(request)
+    getResults = getRequest(request)
+    return render(request, 'home.html', getResults)
 
 
 def result(request):
-    try:
-        getResults = getRequest(request)
-        return render(request, 'result.html', getResults)
-    except Exception:
-        return showError(request)
-
-
-def hresult(request):
-    try:
-        getHresults = getHistoricRequest(request)
-        return JsonResponse(getHresults, safe=False)
-    except Exception:
-        return showError(request)
-
-
+    getResults = getRequest(request)
+    return render(request, 'result.html', getResults)
+   
 def showError(request):
     return render(request, 'error.html', {}, status=500)
     

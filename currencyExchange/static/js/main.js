@@ -4,8 +4,11 @@ var timerId = null;
 
 $(document).ready(function(){
     formData = $("#currency-ex-form").serializeArray();
-    if(formData && formData[0].value != "") drawGraph();
-    startTimer();    
+    if(formData && formData[0].value != ""){
+        // drawGraph();
+        startTimer();   
+    } 
+     
 });
 
 function validateForm(){
@@ -76,57 +79,57 @@ function currencySwitch(){
     $('#toCurr').val(froCurr);
 }
 
-// draw historic data graph
-function drawGraph() {    
-    $.ajax({
-        type    : 'GET',
-        url     : '/hresult',
-        data    :  formData,
-        encode  : true,
-        async   : true 
-    }).done(function(data) {        
-        // create the chart
-        $('#hresult-graph').highcharts('StockChart', {
+// // draw historic data graph
+// function drawGraph() {    
+//     $.ajax({
+//         type    : 'GET',
+//         url     : '/hresult',
+//         data    :  formData,
+//         encode  : true,
+//         async   : true 
+//     }).done(function(data) {        
+//         // create the chart
+//         $('#hresult-graph').highcharts('StockChart', {
 
-            title: {
-                text: "1 " + formData[1].value + " \u2192 " + formData[2].value
-            },
+//             title: {
+//                 text: "1 " + formData[1].value + " \u2192 " + formData[2].value
+//             },
 
-            rangeSelector: {
-                 enabled: false
-            },
+//             rangeSelector: {
+//                  enabled: false
+//             },
 
-            scrollbar: {
-                enabled: false
-            },
+//             scrollbar: {
+//                 enabled: false
+//             },
 
-            series: [{
-                name: formData[2].value,
-                type: 'area',
-                data: data,
-                gapSize: 5,
-                tooltip: {
-                    valueDecimals: 4
-                },
-                fillColor: {
-                    linearGradient: {
-                        x1: 0,
-                        y1: 0,
-                        x2: 0,
-                        y2: 1
-                    },
-                    stops: [
-                        [0, Highcharts.getOptions().colors[0]],
-                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                    ]
-                },
-                threshold: null
-            }]
-        });
-    })
-    .fail(function(data){
-        $('#hresult-graph').append(data.responseText);
-    });
-}
+//             series: [{
+//                 name: formData[2].value,
+//                 type: 'area',
+//                 data: data,
+//                 gapSize: 5,
+//                 tooltip: {
+//                     valueDecimals: 4
+//                 },
+//                 fillColor: {
+//                     linearGradient: {
+//                         x1: 0,
+//                         y1: 0,
+//                         x2: 0,
+//                         y2: 1
+//                     },
+//                     stops: [
+//                         [0, Highcharts.getOptions().colors[0]],
+//                         [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+//                     ]
+//                 },
+//                 threshold: null
+//             }]
+//         });
+//     })
+//     .fail(function(data){
+//         $('#hresult-graph').append(data.responseText);
+//     });
+// }
 
 
