@@ -6,13 +6,20 @@ from .getRequest import *
 
 
 def home(request):
-    getResults = getRequest(request)
-    return render(request, 'home.html', getResults)
+    try:
+        getResults = getRequest(request)
+        return render(request, 'home.html', getResults)
+    except Exception:
+        return showError(request)
 
 
 def result(request):
-    getResults = getRequest(request)
-    return render(request, 'result.html', getResults)
+    try:
+        getResults = getRequest(request)
+        return render(request, 'result.html', getResults)
+    except Exception as e:
+        return showError(request)
+
    
 def showError(request):
     return render(request, 'error.html', {}, status=500)
