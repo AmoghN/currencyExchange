@@ -1,51 +1,51 @@
-
 /*!
  * Generated with CSS Flag Sprite generator (https://www.flag-sprites.com/)
  */
+
 .flag {
     display: inline-block;
-    width: 16px;
-    height: 11px;
+    width: 48px;
+    height: 48px;
     background: url('../images/flags.png') no-repeat;
 }
 
 
-.flag.flag-ru {
-    background-position: -48px -11px;
-}
-
-.flag.flag-ch {
-    background-position: -32px 0;
-}
-
-.flag.flag-ca {
-    background-position: -16px 0;
-}
-
-.flag.flag-jp {
-    background-position: -32px -11px;
-}
-
-.flag.flag-us {
-    background-position: -16px -22px;
-}
-
 .flag.flag-au {
-    background-position: 0 0;
-}
-
-.flag.flag-gb {
-    background-position: 0 -11px;
-}
-
-.flag.flag-in {
-    background-position: -16px -11px;
-}
-
-.flag.flag-eu {
     background-position: -48px 0;
 }
 
+.flag.flag-ca {
+    background-position: -96px 0;
+}
+
+.flag.flag-ch {
+    background-position: -144px 0;
+}
+
+.flag.flag-eu {
+    background-position: 0 -48px;
+}
+
+.flag.flag-gb {
+    background-position: -48px -48px;
+}
+
+.flag.flag-in {
+    background-position: -96px -48px;
+}
+
+.flag.flag-jp {
+    background-position: -144px -48px;
+}
+
+.flag.flag-ru {
+    background-position: 0 -96px;
+}
+
 .flag.flag-sg {
-    background-position: 0 -22px;
+    background-position: -48px -96px;
+}
+
+.flag.flag-us {
+    background-position: -96px -96px;
 }

@@ -1,34 +1,33 @@
 <div id="currency-ex-result">
-    <h4><small>{{exRates.timestamp}} GMT. Refreshing in <span id="timer-refresh">60 seconds...</span></small></h4>    
-    <h2><b>{{getValues.amt}} {{getValues.froCurr}}</b> = {{exRates.value}} {{getValues.toCurr}}</h2>           
-    <table id="currency-ex-table" class="table table-striped">         
-        <tbody>
+    <small>{{exRates.timestamp}} GMT. Refreshing in <span id="timer-refresh">60 seconds...</span></small>
+    <h2>{{getValues.amt}} {{getValues.froCurr}} = <b>{{exRates.value}} {{getValues.toCurr}} </b></h2>
+    <table id="currency-ex-table" class="table">
+        <thead class="thead-light">
             <tr>
-                <td class="col-sm-2">&nbsp;</td>                        
+                <th>&nbsp;</th>
                 {% for sym in commonCurrencies %}
-                <td class="col-sm-2">
-                    {{sym|get_currency_name}} 
-                    <span class="flag flag-{{sym|get_flag}}" alt="{{sym|get_currency_name}}"></span>
-                </td>                   
+                <th>
+                    <span class="flag flag-{{sym|get_flag}}" alt="{{sym|get_currency_name}}"></span> <br> {{sym|get_currency_name}}
+                </th>
                 {% endfor %}
             </tr>
+        </thead>
+        <tbody>
             <tr>
-                <td class="col-sm-2">
-                    1 {{getValues.froCurr|get_currency_name}} 
-                    <span class="flag flag-{{getValues.froCurr|get_flag}}" alt="{{getValues.froCurr|get_currency_name}}"></span>
+                <td>
+                   1 {{getValues.froCurr|get_currency_name}}
                 </td>
                 {% for exRate in exRates.commonConversion %}
-                    <td class="col-sm-2">{{exRate}}</td>
+                    <td>{{exRate}}</td>
                 {% endfor %}
             </tr>
             <tr>
                 <td>Inverse</td>
                 {% for exRate in exRates.commonInConversion %}
-                    <td class="col-sm-2">{{exRate}}</td>
+                    <td>{{exRate}}</td>
                 {% endfor %}
             </tr>
         </tbody>
     </table>
     <h4><small><br></small></h4>
 </div>
-

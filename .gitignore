@@ -6,3 +6,4 @@ staticfiles
 *.sqlite3
 .vscode
 *.conf
+currencyExchange/.settings.py.swp
