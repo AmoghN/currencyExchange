@@ -1,7 +1,6 @@
-import datetime
-from .getData import *
+from .getData import getExchange
 # all currencies constants
-from .allCurrencies import *
+from .allCurrencies import allCurrencies, commonCurrencies
 
 
 def getRequest(request):
@@ -22,9 +21,9 @@ def getRequest(request):
         exRates = getExchange(amt, froCurr, toCurr)
 
     getValues = {
-        "amt" : amt,
-        "toCurr" : toCurr,
-        "froCurr" : froCurr
+        "amt": amt,
+        "toCurr": toCurr,
+        "froCurr": froCurr
     }
 
     # result object

@@ -26,8 +26,16 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+if os.getenv('ENVIRONMENT') == 'PROD':
+    DEBUG = False
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = ['currencyexapp.herokuapp.com']
+ALLOWED_HOSTS = None
+if os.getenv('ENVIRONMENT') == 'PROD':
+    ALLOWED_HOSTS = ['currencyexapp.herokuapp.com']
+else:
+    ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
